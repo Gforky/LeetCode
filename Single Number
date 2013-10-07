@@ -1,0 +1,16 @@
+public class Solution {
+    public int singleNumber(int[] A) {
+        // Note: The Solution object is instantiated only once and is reused by each test case.
+        /* use XOR operation for finding the unique number that exactly appear once */
+        int unique = 0;
+        int index = 0;
+        for(int i=0; i<A.length;i++)
+            unique ^= A[i];
+        for(int j=0; j<A.length;j++)
+        {
+            if( unique == A[j])
+            index = j;
+        }
+        return unique;
+    }
+}

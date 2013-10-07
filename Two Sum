@@ -1,0 +1,22 @@
+public class Solution {
+    public int[] twoSum(int[] numbers, int target) {
+        // Note: The Solution object is instantiated only once and is reused by each test case.
+        int[] Sums = new int[numbers.length*numbers.length];
+        int count = 0;
+        for(int i=0; i<numbers.length; i++)
+        {
+            if(numbers[i]<target)
+            {
+                for(int j=i+1; j<numbers.length; j++)
+                {
+                    if(numbers[i]+numbers[j] == target)
+                    {
+                    Sums[count] = i+1; count++;   //not zero-based
+                    Sums[count] = j+1; count++;
+                    }
+                }
+            }
+        }
+        return Sums;
+    }
+}

@@ -1,0 +1,22 @@
+/**
+ * Definition for binary tree
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    public boolean isSymmetric(TreeNode root) {
+        // Note: The Solution object is instantiated only once and is reused by each test case.
+        if(root == null) return true;  //{} is symmetric
+        return checkChild(root.left, root.right);
+    }
+    private boolean checkChild(TreeNode x, TreeNode y){
+        if(x == null && y == null)  return true;    // traverse to the leaf nodes
+        else if(x == null || y == null) return false;   //not complete binary tree
+        else if(x.val != y.val) return false;
+        else return (checkChild(x.left, y.right) & checkChild(x.right, y.left));
+    }
+}

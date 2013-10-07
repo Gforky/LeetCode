@@ -1,0 +1,40 @@
+public class Solution {
+    public int maxProfit(int[] prices) {
+        // Note: The Solution object is instantiated only once and is reused by each test case.
+        int profit = 0;
+        int buy = 0;
+        int sell = 0;
+        int lastTran = 0;  //flag for tracking the transactions, '0' is sell, '1' is buy
+        if(prices.length == 0 || prices.length == 1) return 0;  //empty array
+        if(prices[0] < prices[1])   //cannot buy when equal as (2,2,5)
+        {
+          buy += prices[0];
+          lastTran = 1;
+        }
+        for(int i=1; i<prices.length;i++)
+        {
+            if(i == prices.length-1)  //special case at the last element
+            {
+                if(lastTran == 1) sell += prices[i];
+            }
+            else if(prices[i-1]<=prices[i] && prices[i]>prices[i+1])  //top
+            {
+             if(lastTran == 1)          //check if bought before sell
+              {
+              sell += prices[i];
+              lastTran = 0;
+              }
+            }
+            else if(prices[i-1]>=prices[i] && prices[i]<prices[i+1])  //bottom
+            {  
+               if(lastTran == 0)       //check if sold before buy
+               {
+                buy += prices[i];
+                lastTran = 1;
+               }
+            }
+        }
+        profit = sell - buy;
+        return profit;
+    }
+}

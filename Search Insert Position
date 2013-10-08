@@ -1,0 +1,31 @@
+public class Solution {
+    public int searchInsert(int[] A, int target) {
+        // Note: The Solution object is instantiated only once and is reused by each test case.
+        if(A.length == 0) return 0;
+        else if(A.length == 1)
+        {
+            if(target == A[0] || target < A[0]) return 0;
+            else return 1;
+        }
+        else return check(A, 0, A.length-1, target);
+    }
+    private int check(int[] A, int left, int right, int target)  //binary search
+    {
+        int mid = (int)Math.floor((left+right)/2);
+        if(A[mid] == target) return mid;
+        else if((right-left) == 1)     //cannot find the target after search the entire array
+        {
+            if(target>A[right]) return right+1;      //insert the target before the right element
+            else if(target<A[left])
+            {
+                if((left-1)>0) return left-1;    //insert before the left element
+                else return 0;        //insert at the begining
+            }
+            else return right;   //insert btween left and right
+        }
+        else{
+            if(target>A[mid]) return check(A, mid, right, target);
+            else return check(A, left, mid, target);
+        }
+    }
+}

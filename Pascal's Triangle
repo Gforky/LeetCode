@@ -1,0 +1,23 @@
+public class Solution {
+    public ArrayList<ArrayList<Integer>> generate(int numRows) {
+        // Note: The Solution object is instantiated only once and is reused by each test case.
+        ArrayList<ArrayList<Integer>> result = new ArrayList<ArrayList<Integer>>();
+        if(numRows == 0) return result;
+        ArrayList<Integer> first = new ArrayList<Integer>();
+        first.add(1);
+        result.add(first);
+        for(int i=1; i<numRows; i++)
+        {
+            ArrayList<Integer> last = result.get(i-1);
+            ArrayList<Integer> current = new ArrayList<Integer>();
+            current.add(1);
+            for(int j=1; j<i; j++)
+            {
+                current.add(last.get(j-1)+last.get(j));
+            }
+            current.add(1);
+            result.add(current);
+        }
+        return result;
+    }
+}

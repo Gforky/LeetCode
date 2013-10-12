@@ -1,0 +1,40 @@
+public class Solution {
+    public String intToRoman(int num) {
+        // Note: The Solution object is instantiated only once and is reused by each test case.
+        String result = new String();
+        if(0 == num) return result;
+        HashMap<Integer, Character> map = new HashMap<Integer, Character>();
+        map.put(1, 'I');
+        map.put(5, 'V');
+        map.put(10, 'X');
+        map.put(50, 'L');
+        map.put(100, 'C');
+        map.put(500, 'D');
+        map.put(1000, 'M');
+        int temp = num;
+        int current = num%10;
+        int bit = 1;
+        while(0 != temp)  //divided by 10 until the highest digit
+        {
+            temp/=10;
+            if(3>=current)
+            {
+                for(int i=0; i<current;i++)
+                    result=map.get(bit).toString()+result;  //add the new char to left
+            }
+            else if(4 == current)
+                result=(map.get(bit).toString()+map.get(bit*5).toString()+result);
+            else if(5<=current && 8>=current)
+            {   
+                for(int i=0; i<(current-5); i++)     //add 'I' first
+                    result=map.get(bit).toString()+result;
+                result=map.get(bit*5).toString()+result;
+            }
+            else
+                result=(map.get(bit).toString()+map.get(bit*10).toString()+result);
+            bit*=10;
+            current=temp%10;
+        }
+        return result;
+    }
+}

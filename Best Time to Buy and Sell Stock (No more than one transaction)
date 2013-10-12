@@ -1,0 +1,26 @@
+public class Solution {
+    public int maxProfit(int[] prices) {
+        // Note: The Solution object is instantiated only once and is reused by each test case.
+        if(0 == prices.length) return 0;
+        int buy = 0, sell = 0, profit = prices[sell]-prices[buy];
+        for(int i=1; i<prices.length-1; i++)
+        {
+            if(prices[i-1]>=prices[i] && prices[i]<prices[i+1])   //bottom
+            {
+                if(prices[i]<prices[buy])
+                    buy = i;
+            }
+            if(prices[i-1]<prices[i] && prices[i]>=prices[i+1])   //top
+            {
+                    sell = i;
+            }
+            if(sell>buy)
+            {
+                profit = (prices[sell] - prices[buy])>profit ? prices[sell] - prices[buy] : profit;
+            }
+        }
+        sell = prices.length-1;  //check the last day
+        profit = (prices[sell] - prices[buy])>profit ? prices[sell] - prices[buy] : profit;
+        return profit;
+    }
+}

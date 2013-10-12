@@ -1,0 +1,21 @@
+public class Solution {
+    public ArrayList<Integer> grayCode(int n) {
+        // Note: The Solution object is instantiated only once and is reused by each test case.
+        ArrayList<Integer> result = new ArrayList<Integer>();
+        if(n <= 1)
+        {
+            result.add(0);
+            if(n == 1)
+                result.add(1);
+            return result;
+        }
+        ArrayList<Integer> temp = grayCode(n-1);
+        int highest_bit = 1<<n-1;
+        for(int i=temp.size()-1; 0<=i; i--)
+        {
+            result.add(temp.get(i)+highest_bit);
+        }
+        temp.addAll(result);
+        return temp;
+    }
+}

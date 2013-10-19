@@ -1,0 +1,39 @@
+/**
+ * Definition for binary tree
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    public ArrayList<ArrayList<Integer>> levelOrderBottom(TreeNode root) {
+        // Note: The Solution object is instantiated only once and is reused by each test case.
+    ArrayList<ArrayList<Integer>> result = new ArrayList<ArrayList<Integer>>();
+    if(root == null) return result;
+    Stack<ArrayList<Integer>> container = new Stack<ArrayList<Integer>>();
+    Queue bfs = new LinkedList();
+    bfs.add(root);
+    helpler(bfs, container);
+    while(!container.isEmpty()){
+        result.add(container.pop());
+    }
+    return result;
+    }
+    private void helpler(Queue q, Stack<ArrayList<Integer>> s){
+       if(q.isEmpty()) return;
+       Queue replace = new LinkedList();
+       ArrayList<Integer> current = new ArrayList<Integer>();
+       while(!q.isEmpty()){
+           TreeNode child = (TreeNode)q.remove();
+           current.add(child.val);
+           if(child.left != null)
+           replace.add(child.left);
+           if(child.right != null)
+           replace.add(child.right);
+       }
+       s.push(current);
+       helpler(replace, s);
+    }
+}

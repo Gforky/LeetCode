@@ -1,0 +1,18 @@
+public class Solution {
+    public int minPathSum(int[][] grid) {
+        // Note: The Solution object is instantiated only once and is reused by each test case.
+        if(grid == null) return 0;
+        int m = grid.length;
+        int n = grid[0].length;
+        int result = 0;
+        for(int a=1; a<n; a++)
+            grid[0][a]+=grid[0][a-1];
+        for(int b=1; b<m; b++)
+            grid[b][0]+=grid[b-1][0];
+        for(int i=1; i<m; i++)
+            for(int j=1; j<n; j++)
+                grid[i][j] = (int)Math.min(grid[i-1][j]+grid[i][j], grid[i][j-1]+grid[i][j]);   //refresh the min distance for very grid
+        result = grid[m-1][n-1];
+        return result;
+    }
+}

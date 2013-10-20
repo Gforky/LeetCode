@@ -1,0 +1,41 @@
+public class Solution {
+    public boolean searchMatrix(int[][] matrix, int target) {
+        // Note: The Solution object is instantiated only once and is reused by each test case.
+        if(matrix.length == 0 || matrix[0].length == 0) return false;
+        if(target>matrix[matrix.length-1][matrix[0].length-1] || target<matrix[0][0]) return false;  //basic cases
+        int m = matrix.length, n = matrix[0].length;
+        for(int i=0; i<n; i++)   //check last row firstly
+            if(target == matrix[m-1][i])
+                return true;
+        return helpler(matrix, 0, m-1, target);   //binary search for each row recursively
+    }
+    private boolean helpler(int[][] matrix, int low, int high, int target)   //binary search
+    {
+        if((high-low) == 1 || high == low)
+            return helpler2(matrix, low, 0, matrix[0].length-1, target);
+        int mid = (int)Math.floor((low+high)/2);
+        if(target>matrix[mid][0])
+            return helpler(matrix, mid, high, target);
+        else if(target<matrix[mid][0])
+            return helpler(matrix, low, mid, target);
+        else
+            return true;
+    }
+    private boolean helpler2(int[][]matrix, int row, int left, int right, int target)   //binary search for the final row
+    {
+        if((right-left) == 1 || right == left)
+        {
+            if(matrix[row][left] == target || matrix[row][right] == target)
+                return true;
+            else
+                return false;
+        }
+        int mid = (int)Math.floor((right+left)/2);
+        if(target>matrix[row][mid])
+            return helpler2(matrix, row, mid, right, target);
+        else if(target<matrix[row][mid])
+            return helpler2(matrix, row, left, mid, target);
+        else
+            return true;
+    }
+}

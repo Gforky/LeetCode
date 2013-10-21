@@ -1,0 +1,29 @@
+public class Solution {
+    public ArrayList<String> generateParenthesis(int n) {
+        // Note: The Solution object is instantiated only once and is reused by each test case.
+        ArrayList<String> result = new ArrayList<String>();
+        if(n == 0) return result;
+        char[] temp = new char[n*2];
+        int left = 0;
+        int right = 0;
+        int count = 0;
+        helpler(left, right, count, n, temp, result);
+        return result;
+    }
+    private void helpler(int left, int right, int count, int n, char[] temp, ArrayList<String> result)
+    {
+        if(left>n || right>left) return;  //invalid state
+        if((left+right) == (n*2)) result.add(String.copyValueOf(temp));
+        else
+        {
+            if(left<n){                         //add "(" if any left
+                temp[count] = '(';
+                helpler(left+1, right, count+1, n, temp, result);
+            }
+            if(right<left){                      //add ")" is valid, only when # of "(" is larger than the # of ")"
+                temp[count] = ')';
+                helpler(left, right+1, count+1, n, temp, result);
+            }
+        }
+    }
+}

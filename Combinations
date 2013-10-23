@@ -1,0 +1,22 @@
+public class Solution {
+    public ArrayList<ArrayList<Integer>> combine(int n, int k) {
+        // Note: The Solution object is instantiated only once and is reused by each test case.
+        ArrayList<ArrayList<Integer>> result = new ArrayList<ArrayList<Integer>>();
+        if(n <= 0 || k <= 0 || n<k) return result;
+        return helpler(1, n, k);
+    }
+    private ArrayList<ArrayList<Integer>> helpler(int min, int n, int k)
+    {
+        ArrayList<ArrayList<Integer>> result = new ArrayList<ArrayList<Integer>>();
+        if(k == 0) result.add(new ArrayList<Integer>());
+        else{
+            for(int i=min; i<=n-k+1; i++)
+                for(ArrayList<Integer> temp : helpler(i+1, n, k-1))
+                {
+                    temp.add(0, i);
+                    result.add(temp);
+                }
+        }
+        return result;
+    }
+}

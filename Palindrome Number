@@ -1,0 +1,19 @@
+public class Solution {
+    public boolean isPalindrome(int x) {
+        // Note: The Solution object is instantiated only once and is reused by each test case.
+        if(x<0)
+            return false;
+        if((x/10) == 0) return true;
+        int temp = 1;
+        while(x/temp >= 10)
+            temp*=10;
+        while(x != 0)
+        {
+            if(x/temp != x%10)  //check if the highest digit equals to the lowest digit
+                return false;
+            x=(x%temp)/10;  //eliminate highest and lowset digits
+            temp/=100;
+        }
+        return true;
+    }
+}

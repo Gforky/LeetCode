@@ -1,0 +1,29 @@
+public class Solution {
+    public boolean search(int[] A, int target) {
+        // Note: The Solution object is instantiated only once and is reused by each test case.
+       if(A.length == 0) return false;
+       return helpler(A, 0, A.length-1, target);
+    }
+    private boolean helpler(int[] A, int low, int high, int target)
+    {
+        int mid = (low+high)/2;
+        if(A[mid] == target) return true;
+        if(low>high) return false;
+        if(A[mid]>A[low])
+        {
+            if(target<A[mid] && target>=A[low])
+                return helpler(A, low, mid-1, target);
+            else
+                return helpler(A, mid+1, high, target);
+        }
+        else if(A[mid]<A[low])
+        {
+            if(target>A[mid] && target<=A[high])
+                return helpler(A, mid+1, high, target);
+            else
+                return helpler(A, low, mid-1, target);
+        }
+        else
+            return helpler(A, low, mid-1, target) | helpler(A, mid+1, high, target);
+    }
+}

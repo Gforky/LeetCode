@@ -1,0 +1,32 @@
+/**
+ * Definition for binary tree
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    public int sumNumbers(TreeNode root) {
+        // Note: The Solution object is instantiated only once and is reused by each test case.
+       if(root == null) return 0;
+       int result = 0;
+       int number = 0;
+       ArrayList<Integer> numbers = new ArrayList<Integer>();
+       numbers = helpler(root, numbers, number);
+       for(Integer x : numbers)
+        result+=x;
+       return result;
+    }
+    private ArrayList<Integer> helpler(TreeNode root, ArrayList<Integer> numbers, int number)
+    {
+        if(root == null) return numbers;
+        number=number*10+root.val;
+        if(root.left == null && root.right == null)
+            numbers.add(number);
+        helpler(root.left, numbers, number);
+        helpler(root.right, numbers, number);
+        return numbers;
+    }
+}

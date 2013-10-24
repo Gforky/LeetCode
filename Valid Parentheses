@@ -1,0 +1,39 @@
+public class Solution {
+    public boolean isValid(String s) {
+        // Note: The Solution object is instantiated only once and is reused by each test case.
+        if(s == null || s.length() == 1) return false;
+        Stack<Character> temp = new Stack<Character>();
+        int count = 0;
+        while(count<s.length())
+        {
+            if(s.charAt(count) == '(' || s.charAt(count) == '[' || s.charAt(count) == '{')
+                temp.push(s.charAt(count));
+            else if(s.charAt(count) == ')')
+            {
+                if(!temp.empty() && temp.peek() == '(')
+                    temp.pop();
+                else
+                    return false;
+            }
+            else if(!temp.empty() && s.charAt(count) == ']')
+            {
+                if(temp.peek() == '[')
+                    temp.pop();
+                else
+                    return false;
+            }
+            else if(!temp.empty() && s.charAt(count) == '}')
+            {
+                if(temp.peek() == '{')
+                    temp.pop();
+                else
+                    return false;
+            }
+            count++;  //next char
+        }// end while loop
+        if(temp.empty())
+            return true;
+        else
+            return false;
+    }
+}

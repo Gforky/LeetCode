@@ -1,0 +1,22 @@
+public class Solution {
+    public String longestCommonPrefix(String[] strs) {
+        // Note: The Solution object is instantiated only once and is reused by each test case.
+        if(strs.length == 0 || strs[0].length() == 0) return "";  //not null but empty string or first string is empty string
+        int index = strs[0].length()-1;
+        for(int i=1; i<strs.length; i++)
+        {
+            if(strs[i].length() == 0 || strs[i].charAt(0) != strs[0].charAt(0))//one of the strings has no common prefix
+                return "";
+            index = Math.min(index, strs[i].length()-1);
+            for(int j=1; j<=index; j++)
+            {
+                if(strs[i].charAt(j) != strs[0].charAt(j))//end the search when character not match
+                {
+                    index = j-1;
+                    break;
+                }
+            }//end of one string
+        }//end of the array
+        return strs[0].substring(0, index+1);
+    }
+}

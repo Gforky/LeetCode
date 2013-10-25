@@ -1,0 +1,22 @@
+public class Solution {
+    public ArrayList<ArrayList<Integer>> subsets(int[] S) {
+        // Note: The Solution object is instantiated only once and is reused by each test case.
+        ArrayList<ArrayList<Integer>> result = new ArrayList<ArrayList<Integer>>();
+        if(S.length == 0) return result;
+        Arrays.sort(S); //non-descending order
+        result.add(new ArrayList<Integer>());
+        for(int i=0; i<S.length; i++)
+        {
+            int current = S[i];
+            ArrayList<ArrayList<Integer>> temp = new ArrayList<ArrayList<Integer>>();
+            for(ArrayList<Integer> item : result)
+            {
+                ArrayList<Integer> cache = new ArrayList<Integer>(item); //need to create a new instance, or will replcace the old one
+                cache.add(current);
+                temp.add(cache);
+            }
+            result.addAll(temp);
+        }//end for loop
+        return result;
+    }
+}

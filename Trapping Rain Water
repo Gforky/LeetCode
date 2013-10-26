@@ -1,0 +1,30 @@
+public class Solution {
+    public int trap(int[] A) {
+        // Note: The Solution object is instantiated only once and is reused by each test case.
+        if(A.length == 0) return 0;
+        int water = 0, left = 0, right = A.length-1, temp = 0;
+        while(left<right)
+        {
+            if(A[left]<=A[right])
+            {
+                temp = left+1;
+                while(A[left]>A[temp])
+                {
+                    water+=(A[left]-A[temp]);
+                    temp++;
+                }
+                left = temp;
+            }
+            else{
+                temp = right-1;
+                while(A[right]>A[temp])
+                {
+                    water+=(A[right]-A[temp]);
+                    temp--;
+                }
+                right = temp;
+            }
+        }//end while loop
+         return water;
+    }
+}

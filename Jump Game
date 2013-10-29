@@ -1,0 +1,23 @@
+public class Solution {
+    public boolean canJump(int[] A) {
+        // Note: The Solution object is instantiated only once and is reused by each test case.
+        if(A.length == 0 || A.length == 1) return true;
+        int toEnd = A.length-1;
+        return helpler(toEnd, A, 0);
+    }
+    private boolean helpler(int toEnd, int[] A, int index)
+    {
+        if(A[index] == 0)
+            return false;
+        else if(A[index] >= toEnd)
+            return true;
+        else{
+            for(int i=A[index]; i>0; i--)
+            {
+               if(helpler(toEnd-A[index], A, A.length-1-toEnd+A[index]))
+                    return true;
+            }
+        }
+        return false;
+    }
+}

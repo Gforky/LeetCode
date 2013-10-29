@@ -1,0 +1,67 @@
+public class Solution {
+    public boolean isValidSudoku(char[][] board) {
+        // IMPORTANT: Please reset any member data you declared, as
+        // the same Solution instance will be reused for each test case.
+        if(board == null || board.length != 9 || board[0].length != 9) return false;
+        /* check rows */
+        for(int i=0; i<9; i++)
+        {
+            int[] check = new int[9];
+            for(int j=0; j<9; j++)
+            {
+              if(board[i][j] != '.')
+              {
+                int current = Character.getNumericValue(board[i][j]);
+                if(current<1 || current>9)
+                    return false;
+                else
+                {
+                    if(check[current-1] == 1)
+                        return false;
+                    else
+                        check[current-1] = 1;
+                }
+              }
+            }
+        }
+        /* check columns */
+        for(int i=0; i<9; i++)
+        {
+            int[] check = new int[9];
+            for(int j=0; j<9; j++)
+            {
+                if(board[j][i] != '.')
+                {
+                    int current = Character.getNumericValue(board[j][i]);
+                    if(check[current-1] == 1)
+                        return false;
+                    else
+                        check[current-1] = 1;
+                }
+            }
+        }
+        /* check grids */
+        for(int i=0; i<3; i++)
+        {
+            for(int j=0; j<3; j++)
+            {
+                int[] check = new int[9];
+                for(int x=3*i; x<3*i+3; x++)
+                {
+                    for(int y=3*j; y<3*j+3; y++)
+                    {
+                       if(board[x][y] != '.')
+                        {
+                        int current = Character.getNumericValue(board[x][y]);
+                        if(check[current-1] == 1)
+                            return false;
+                        else
+                            check[current-1] = 1;
+                        } 
+                    }
+                }
+            }
+        }
+        return true;
+    }
+}

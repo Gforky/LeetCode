@@ -1,0 +1,14 @@
+public class Solution {
+    public int minimumTotal(ArrayList<ArrayList<Integer>> triangle) {
+        // IMPORTANT: Please reset any member data you declared, as
+        // the same Solution instance will be reused for each test case.
+        /* bottom up, just using triangle's space, O(K) time complexity, K is triangle's numbers */
+        if(triangle == null) return 0;
+        for(int i=triangle.size()-2; i>=0; i--)
+        {
+            for(int j=0; j<=i; j++)
+            triangle.get(i).set(j, Math.min(triangle.get(i+1).get(j)+triangle.get(i).get(j), triangle.get(i+1).get(j+1)+triangle.get(i).get(j)));
+        }
+        return triangle.get(0).get(0);
+    }
+}

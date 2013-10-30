@@ -1,0 +1,30 @@
+public class Solution {
+    public int lengthOfLastWord(String s) {
+        // IMPORTANT: Please reset any member data you declared, as
+        // the same Solution instance will be reused for each test case.
+        if(s.length() == 0) return 0;
+        int result = 0, check;
+        for(check = s.length()-1; check>=0;)
+        {
+            if(s.charAt(check) == ' ')
+                check--;
+            else
+                break;
+                
+        }
+        if(check>=0)
+        {
+         while(check>=0)
+         {
+            if(s.charAt(check) != ' ')
+            {
+                result+=1;
+                check--;
+            }
+            else
+                break;
+         }
+        }
+        return result;
+    }
+}

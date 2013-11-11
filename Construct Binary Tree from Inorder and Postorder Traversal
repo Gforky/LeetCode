@@ -1,0 +1,36 @@
+/**
+ * Definition for binary tree
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    public TreeNode buildTree(int[] inorder, int[] postorder) {
+        // IMPORTANT: Please reset any member data you declared, as
+        // the same Solution instance will be reused for each test case.
+        return helpler(inorder, 0, inorder.length-1, postorder, 0, postorder.length-1);
+    }
+    private TreeNode helpler(int[] inorder, int s0, int e0, int[] postorder, int s1, int e1)
+    {
+        if(s0>e0 || s1>e1)
+            return null;
+        int rootVal = postorder[e1];
+        TreeNode root = new TreeNode(rootVal);
+        int check = 0;
+        for(int i=s0; i<=e0; i++)
+        {
+            if(inorder[i] == root.val)
+            {    
+                check = i;
+                break;
+            }
+        }//end for
+        int left = check-s0;
+        root.left = helpler(inorder, s0, check-1, postorder, s1, s1+left-1);
+        root.right = helpler(inorder, check+1, e0, postorder, s1+left, e1-1);
+        return root;
+    }
+}

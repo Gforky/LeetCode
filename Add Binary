@@ -1,0 +1,31 @@
+public class Solution {
+    public String addBinary(String a, String b) {
+        // IMPORTANT: Please reset any member data you declared, as
+        // the same Solution instance will be reused for each test case.
+        if(a == null || b == null)
+            return null;
+        String result = "";
+        if(a.isEmpty() || b.isEmpty())
+            return result;
+        return helpler(result, a, b);
+    }
+    private String helpler(String result, String a, String b)
+    {
+        int carrier = 0;
+        int m = a.length()-1;
+        int n = b.length()-1;
+        for(int i=0; i<=Math.max(m, n); i++)
+        {
+            int c_a = (m>=i) ? a.charAt(m-i)-'0' : 0;
+            int c_b = (n>=i) ? b.charAt(n-i)-'0' : 0;
+            result = (c_a+c_b+carrier)%2 + result;
+            carrier = (c_a+c_b+carrier)/2;
+        }
+        if(carrier == 0)
+            return result;
+        else{
+            result = "1"+result;
+            return result;
+        }
+    }
+}

@@ -1,0 +1,41 @@
+public class Solution {
+    public ArrayList<ArrayList<String>> partition(String s) {
+        // IMPORTANT: Please reset any member data you declared, as
+        // the same Solution instance will be reused for each test case.
+        ArrayList<ArrayList<String>> result = new ArrayList<ArrayList<String>>();
+        ArrayList<String> container = new ArrayList<String>();
+       helpler(result, container, s, 0);
+       return result;
+    }
+    private boolean valid(String s, int start, int end)
+    {
+        while(end>start)
+        {
+            if(s.charAt(start) != s.charAt(end))
+                return false;
+            start++;
+            end--;
+        }//end while
+        return true;
+    }
+    private void helpler(ArrayList<ArrayList<String>> result, ArrayList<String> container, String s, int start)
+    {
+        if(start>=s.length())
+        {
+            ArrayList<String> copy = new ArrayList<String>();
+        for (int j = 0; j < container.size(); j++) {
+            copy.add(container.get(j));
+        }
+            result.add(copy);
+        }//end if
+        for(int i=start; i<s.length(); i++)
+        {
+            if(valid(s, start, i))
+            {
+                container.add(s.substring(start, i+1));
+                helpler(result, container, s, i+1);
+                container.remove(container.size()-1);
+            }
+        }//end for
+    }
+}

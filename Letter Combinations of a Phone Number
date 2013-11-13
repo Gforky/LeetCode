@@ -1,0 +1,120 @@
+public class Solution {
+    public ArrayList<String> letterCombinations(String digits) {
+        // IMPORTANT: Please reset any member data you declared, as
+        // the same Solution instance will be reused for each test case.
+        ArrayList<String> result = new ArrayList<String>();
+        String temp = "";
+        if(digits.isEmpty())
+        {
+            result.add(temp);
+            return result;
+        }
+        int count = 0, end = digits.length();
+        helpler(result, temp, digits, count, end);
+        return result;
+    }
+    private void helpler(ArrayList<String> result, String temp, String digits, int count, int end)
+    {
+        if(count == end)
+        {
+            result.add(temp);
+            return;
+        }
+        int digit = digits.charAt(count)-'0';
+        String current = temp;
+        if(digit == 2)
+        {
+            temp+='a';
+            helpler(result, temp, digits, count+1, end);
+            temp = current;
+            temp+='b';
+            helpler(result, temp, digits, count+1, end);
+            temp = current;
+            temp+='c';
+            helpler(result, temp, digits, count+1, end);
+        }
+        else if(digit == 3)
+        {
+            temp+='d';
+            helpler(result, temp, digits, count+1, end);
+            temp = current;
+            temp+='e';
+            helpler(result, temp, digits, count+1, end);
+            temp = current;
+            temp+='f';
+            helpler(result, temp, digits, count+1, end);
+        }
+        else if(digit == 4)
+        {
+            temp+='g';
+            helpler(result, temp, digits, count+1, end);
+            temp = current;
+            temp+='h';
+            helpler(result, temp, digits, count+1, end);
+            temp = current;
+            temp+='i';
+            helpler(result, temp, digits, count+1, end);
+        }
+        else if(digit == 5)
+        {
+            temp+='j';
+            helpler(result, temp, digits, count+1, end);
+            temp = current;
+            temp+='k';
+            helpler(result, temp, digits, count+1, end);
+            temp = current;
+            temp+='l';
+            helpler(result, temp, digits, count+1, end);
+        }
+        else if(digit == 6)
+        {
+            temp+='m';
+            helpler(result, temp, digits, count+1, end);
+            temp = current;
+            temp+='n';
+            helpler(result, temp, digits, count+1, end);
+            temp = current;
+            temp+='o';
+            helpler(result, temp, digits, count+1, end);
+        }
+        else if(digit == 7)
+        {
+            temp+='p';
+            helpler(result, temp, digits, count+1, end);
+            temp = current;
+            temp+='q';
+            helpler(result, temp, digits, count+1, end);
+            temp = current;
+            temp+='r';
+            helpler(result, temp, digits, count+1, end);
+            temp = current;
+            temp+='s';
+            helpler(result, temp, digits, count+1, end);
+        }
+        else if(digit == 8)
+        {
+            temp+='t';
+            helpler(result, temp, digits, count+1, end);
+            temp = current;
+            temp+='u';
+            helpler(result, temp, digits, count+1, end);
+            temp = current;
+            temp+='v';
+            helpler(result, temp, digits, count+1, end);
+        }
+        else if(digit == 9)
+        {
+            temp+='w';
+            helpler(result, temp, digits, count+1, end);
+            temp = current;
+            temp+='x';
+            helpler(result, temp, digits, count+1, end);
+            temp = current;
+            temp+='y';
+            helpler(result, temp, digits, count+1, end);
+            temp = current;
+            temp+='z';
+            helpler(result, temp, digits, count+1, end);
+        }
+    }//end helpler
+}

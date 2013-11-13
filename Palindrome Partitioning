@@ -23,9 +23,7 @@ public class Solution {
         if(start>=s.length())
         {
             ArrayList<String> copy = new ArrayList<String>();
-        for (int j = 0; j < container.size(); j++) {
-            copy.add(container.get(j));
-        }
+            copy.addAll(container);
             result.add(copy);
         }//end if
         for(int i=start; i<s.length(); i++)

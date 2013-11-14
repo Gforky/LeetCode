@@ -1,0 +1,35 @@
+public class Solution {
+    public int lengthOfLongestSubstring(String s) {
+        // IMPORTANT: Please reset any member data you declared, as
+        // the same Solution instance will be reused for each test case.
+        int result = 0, count = 0, temp = 0;
+        boolean valid = true;
+        String current = "";
+        while(count < s.length())
+        {
+            int i = 0;
+            for(i=0; i<current.length(); i++)
+            {
+                if(s.charAt(count) == current.charAt(i))
+                {
+                    valid = false;
+                    break;
+                }
+            }
+            if(valid)
+            {
+                current+=s.charAt(count);
+                temp++;
+                count++;
+            }//end if
+            else{
+                current = current.substring(i+1) + s.charAt(count);
+                valid = true;
+                temp = temp-i;
+                count++;
+            }//end else
+            result = Math.max(result, temp);
+        }//end while
+        return result;
+    }
+}

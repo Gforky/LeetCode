@@ -1,0 +1,17 @@
+public class Solution {
+    public int numDistinct(String S, String T) {
+        // IMPORTANT: Please reset any member data you declared, as
+        // the same Solution instance will be reused for each test case.
+       int[] result = new int[T.length()+1];
+       result[0] = 1;
+       for(int i=0; i<S.length(); i++)
+       {
+           for(int j=T.length()-1; j>=0; j--)
+           {
+               if(T.charAt(j) == S.charAt(i))
+                    result[j+1]+=result[j];
+           }
+       }//end for
+       return result[T.length()];
+    }
+}

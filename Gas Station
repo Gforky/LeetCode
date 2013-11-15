@@ -1,0 +1,29 @@
+public class Solution {
+    public int canCompleteCircuit(int[] gas, int[] cost) {
+        // IMPORTANT: Please reset any member data you declared, as
+        // the same Solution instance will be reused for each test case.
+        int result = -1;
+        for(int i=0; i<gas.length; i++)
+        {
+            int tank = gas[i]-cost[i];
+            int next = i+1;
+            if(next == gas.length)
+                    next = 0;
+            while(next != i)
+            {
+                if(tank < 0)
+                    break;
+                tank = tank+gas[next]-cost[next];//gas left afer arrived at the next station if possible
+                next++;
+                if(next == gas.length)
+                    next = 0;
+            }
+            if(tank >=0 && next == i)//find the unique result
+            {
+                result = i;
+                break;
+            }
+        }
+        return result;
+    }
+}

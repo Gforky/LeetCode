@@ -1,0 +1,19 @@
+public class Solution {
+    public int jump(int[] A) {
+        // IMPORTANT: Please reset any member data you declared, as
+        // the same Solution instance will be reused for each test case.
+        int result = 0, max = A[0], next = 0;
+        for(int i=1; i<A.length; i++)
+        {
+            if(i>next)//can move to the next furthest point
+            {
+                if(max<i)//cannot reach the end, quit
+                    return -1;
+                next = max;
+                result++;
+            }//end if
+            max = Math.max(max, i+A[i]);//furthest point can be reached 
+        }//end for
+        return result;
+    }
+}

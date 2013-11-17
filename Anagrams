@@ -1,0 +1,26 @@
+public class Solution {
+    public ArrayList<String> anagrams(String[] strs) {
+        // IMPORTANT: Please reset any member data you declared, as
+        // the same Solution instance will be reused for each test case.
+        ArrayList<String> result = new ArrayList<String>();
+        if(strs.length <=1)
+            return result;
+        HashMap<String, ArrayList<String>> container = new HashMap<String, ArrayList<String>>();
+        for(String temp : strs)
+        {
+            char[] current = temp.toCharArray();
+            Arrays.sort(current);
+            String now = new String(current);
+            if(container.containsKey(now))
+                container.get(now).add(temp);
+            else
+                container.put(now, new ArrayList<String>(Arrays.asList(temp)));
+        }
+        for(ArrayList<String> check : container.values())
+        {
+            if(check.size() > 1) //which is the result
+                result.addAll(check);
+        }
+        return result;
+    }
+}

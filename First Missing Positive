@@ -1,0 +1,22 @@
+public class Solution {
+    public int firstMissingPositive(int[] A) {
+        // IMPORTANT: Please reset any member data you declared, as
+        // the same Solution instance will be reused for each test case.
+        if(A.length == 0)
+            return 1;
+        Arrays.sort(A);
+        int check = 0;
+        while(check < A.length && A[check] < 0)
+        {
+            check++;
+        }
+        if(A[check] >1 || check == A.length-1 && A[check] < 0)
+            return 1;
+        for(int i=check; i< A.length; i++)
+        {
+            if(i+1<=A.length-1 && A[i+1] != A[i] && A[i+1] != A[i]+1)//special case: duplicates
+                return A[i]+1;
+        }
+        return A[A.length-1]+1;
+    }
+}
